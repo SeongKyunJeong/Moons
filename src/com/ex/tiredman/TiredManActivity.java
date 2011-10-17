@@ -22,7 +22,7 @@ public class TiredManActivity extends Activity {
 	private AnimationSet mAniBody;
 	private AnimationSet mAniEyeLeft;
 	private AnimationSet mAniEyeRight;
-	private AnimationSet mAniHead;
+	private AnimationSet mAniHead; 
 	private AnimationSet mAniFoot;
 	private AnimationSet mAniEarLeft;
 	private AnimationSet mAniEarRight;
