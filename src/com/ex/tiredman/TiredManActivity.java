@@ -21,7 +21,7 @@ public class TiredManActivity extends Activity {
 	/** Called when the activity is first created. */
 	private AnimationSet mAniBody;
 	private AnimationSet mAniEyeLeft;
-	private AnimationSet mAniEyeRight;
+	private AnimationSet mAniEyeRight;   
 	private AnimationSet mAniHead; 
 	private AnimationSet mAniFoot;
 	private AnimationSet mAniEarLeft;
