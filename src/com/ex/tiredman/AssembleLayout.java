@@ -443,7 +443,7 @@ public class AssembleLayout extends Activity {
 
 						imageView.layout(imageView.getLeft(), imageView.getTop() - 150, imageView.getRight(),
 								imageView.getBottom() - 150);
-
+ 
 						ViewGroup.MarginLayoutParams marginObject = null;
 						marginObject = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
 						marginObject.setMargins(marginObject.leftMargin, marginObject.topMargin - 150,
