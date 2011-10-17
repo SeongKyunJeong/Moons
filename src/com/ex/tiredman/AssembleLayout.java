@@ -139,7 +139,7 @@ public class AssembleLayout extends Activity {
 		this.mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).addAnimation(rotate);
 		this.mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).addAnimation(scale);
 		this.mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).setAnimationListener(animationListener);
-		
+
 		rotate = new RotateAnimation(0, 1080, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
 		rotate.setDuration(2000);
 		rotate.setFillAfter(true);
@@ -158,7 +158,6 @@ public class AssembleLayout extends Activity {
 		this.mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).addAnimation(scale);
 		this.mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).setAnimationListener(animationListener);
 
- 
 	}
 
 	private View.OnTouchListener touchListener = new View.OnTouchListener() {
@@ -216,14 +215,14 @@ public class AssembleLayout extends Activity {
 					mMapImageView.get(OBJECT.OBJECT_MOONS_FOOT).setAlpha(255);
 					mMapImageView.get(OBJECT.OBJECT_MOONS_FOOT).startAnimation(
 							mMapAnimationSet.get(OBJECT.OBJECT_MOONS_FOOT));
-				}else if (mWashBox == 4) {
-					
-					// 한곳에 두개의 애니메이션이 시작되니깐 두개가 모두 동작하지 않음.
+				} else if (mWashBox == 4) {
+
+					// ��납����������硫����� ������源����媛�紐⑤� ������ ���.
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).bringToFront();
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).setAlpha(255);
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).startAnimation(
 							mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT));
-					
+
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT).bringToFront();
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT).setAlpha(255);
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT).startAnimation(
@@ -233,31 +232,31 @@ public class AssembleLayout extends Activity {
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT).setAlpha(255);
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT).startAnimation(
 							mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_LEFT));
-					
+
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).bringToFront();
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).setAlpha(255);
 					mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).startAnimation(
 							mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_RIGHT));
 
 				}
-				
-			}else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_BODY)) {
+
+			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_BODY)) {
 				ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD);
-				
-				TranslateAnimation trans = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-105);
+
+				TranslateAnimation trans = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -105);
 				trans.setFillAfter(true);
 				trans.setFillEnabled(true);
 				trans.setDuration(1000);
 				imageView.bringToFront();
 				imageView.startAnimation(trans);
-				
-				trans.setAnimationListener(new Animation.AnimationListener() {					
+
+				trans.setAnimationListener(new Animation.AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
-					
+
 					public void onAnimationRepeat(Animation animation) {
 					}
-					
+
 					public void onAnimationEnd(Animation animation) {
 						ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD);
 						imageView.clearAnimation();
@@ -272,21 +271,21 @@ public class AssembleLayout extends Activity {
 						imageView.setLayoutParams(marginObject);
 					}
 				});
-			}else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_FOOT)) {
-				TranslateAnimation trans = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-45);
+			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_FOOT)) {
+				TranslateAnimation trans = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -45);
 				trans.setFillAfter(true);
 				trans.setFillEnabled(true);
 				trans.setDuration(1000);
 				mMapImageView.get(OBJECT.OBJECT_MOONS_BODY).bringToFront();
 				mMapImageView.get(OBJECT.OBJECT_MOONS_BODY).startAnimation(trans);
-				
-				trans.setAnimationListener(new Animation.AnimationListener() {					
+
+				trans.setAnimationListener(new Animation.AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
-					
+
 					public void onAnimationRepeat(Animation animation) {
 					}
-					
+
 					public void onAnimationEnd(Animation animation) {
 						ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_BODY);
 						imageView.clearAnimation();
@@ -299,21 +298,21 @@ public class AssembleLayout extends Activity {
 						marginObject.setMargins(marginObject.leftMargin, marginObject.topMargin - 45,
 								marginObject.rightMargin, marginObject.bottomMargin);
 						imageView.setLayoutParams(marginObject);
-						
-						TranslateAnimation transH = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-45);
+
+						TranslateAnimation transH = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -45);
 						transH.setFillAfter(true);
 						transH.setFillEnabled(true);
 						transH.setDuration(1000);
 						mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD).bringToFront();
 						mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD).startAnimation(transH);
-						
-						transH.setAnimationListener(new Animation.AnimationListener() {					
+
+						transH.setAnimationListener(new Animation.AnimationListener() {
 							public void onAnimationStart(Animation animation) {
 							}
-							
+
 							public void onAnimationRepeat(Animation animation) {
 							}
-							
+
 							public void onAnimationEnd(Animation animation) {
 								ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD);
 								imageView.clearAnimation();
@@ -330,21 +329,21 @@ public class AssembleLayout extends Activity {
 						});
 					}
 				});
-			}else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_LEFT)) {
-				TranslateAnimation trans = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-150);
+			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_LEFT)) {
+				TranslateAnimation trans = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -150);
 				trans.setFillAfter(true);
 				trans.setFillEnabled(true);
 				trans.setDuration(1000);
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT).bringToFront();
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT).startAnimation(trans);
-				
-				trans.setAnimationListener(new Animation.AnimationListener() {					
+
+				trans.setAnimationListener(new Animation.AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
-					
+
 					public void onAnimationRepeat(Animation animation) {
 					}
-					
+
 					public void onAnimationEnd(Animation animation) {
 						ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT);
 						imageView.clearAnimation();
@@ -359,22 +358,22 @@ public class AssembleLayout extends Activity {
 						imageView.setLayoutParams(marginObject);
 					}
 				});
-			}else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT)) {
-				TranslateAnimation trans = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-150);
+			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT)) {
+				TranslateAnimation trans = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -150);
 				trans.setFillAfter(true);
 				trans.setFillEnabled(true);
 				trans.setDuration(1000);
 				trans.setStartOffset(200);
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).bringToFront();
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).startAnimation(trans);
-				
-				trans.setAnimationListener(new Animation.AnimationListener() {					
+
+				trans.setAnimationListener(new Animation.AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
-					
+
 					public void onAnimationRepeat(Animation animation) {
 					}
-					
+
 					public void onAnimationEnd(Animation animation) {
 						ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
 						imageView.clearAnimation();
@@ -387,25 +386,25 @@ public class AssembleLayout extends Activity {
 						marginObject.setMargins(marginObject.leftMargin, marginObject.topMargin - 150,
 								marginObject.rightMargin, marginObject.bottomMargin);
 						imageView.setLayoutParams(marginObject);
-						
+
 					}
 				});
-			}else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_LEFT)) {
-				TranslateAnimation trans = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-150);
+			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_LEFT)) {
+				TranslateAnimation trans = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -150);
 				trans.setFillAfter(true);
 				trans.setFillEnabled(true);
 				trans.setDuration(1000);
 				trans.setStartOffset(400);
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT).bringToFront();
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT).startAnimation(trans);
-				
-				trans.setAnimationListener(new Animation.AnimationListener() {					
+
+				trans.setAnimationListener(new Animation.AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
-					
+
 					public void onAnimationRepeat(Animation animation) {
 					}
-					
+
 					public void onAnimationEnd(Animation animation) {
 						ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT);
 						imageView.clearAnimation();
@@ -418,38 +417,38 @@ public class AssembleLayout extends Activity {
 						marginObject.setMargins(marginObject.leftMargin, marginObject.topMargin - 150,
 								marginObject.rightMargin, marginObject.bottomMargin);
 						imageView.setLayoutParams(marginObject);
-						
+
 					}
 				});
-			}else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_RIGHT)) {
-				TranslateAnimation trans = new TranslateAnimation(0,0,Animation.RELATIVE_TO_SELF,-150);
+			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_RIGHT)) {
+				TranslateAnimation trans = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, -150);
 				trans.setFillAfter(true);
 				trans.setFillEnabled(true);
 				trans.setDuration(1000);
 				trans.setStartOffset(600);
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).bringToFront();
 				mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT).startAnimation(trans);
-				
-				trans.setAnimationListener(new Animation.AnimationListener() {					
+
+				trans.setAnimationListener(new Animation.AnimationListener() {
 					public void onAnimationStart(Animation animation) {
 					}
-					
+
 					public void onAnimationRepeat(Animation animation) {
 					}
-					
+
 					public void onAnimationEnd(Animation animation) {
 						ImageView imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT);
-						imageView.clearAnimation();
+						imageView.clearAnimation(); 
 
 						imageView.layout(imageView.getLeft(), imageView.getTop() - 150, imageView.getRight(),
 								imageView.getBottom() - 150);
- 
+
 						ViewGroup.MarginLayoutParams marginObject = null;
 						marginObject = (RelativeLayout.LayoutParams) imageView.getLayoutParams();
 						marginObject.setMargins(marginObject.leftMargin, marginObject.topMargin - 150,
 								marginObject.rightMargin, marginObject.bottomMargin);
 						imageView.setLayoutParams(marginObject);
-						
+
 					}
 				});
 			}
