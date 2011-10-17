@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:id="@+id/washLayout" android:layout_height="2000px"
+	android:layout_width="2000px">
+	<ImageView android:src="@drawable/wash_line" android:id="@+id/img_washline"
+		android:layout_width="480px" android:layout_height="600px" android:layout_marginTop="30px"/>
+	<ImageView android:src="@drawable/washing" android:id="@+id/img_wash"
+		android:layout_height="250px" android:layout_width="140px"
+		android:layout_marginLeft="20px" android:layout_marginTop="460px" />
+	<ImageView android:src="@drawable/wash_box" android:id="@+id/img_washbox"
+		android:layout_height="200px" android:layout_width="200px"
+		android:layout_marginTop="470px" android:layout_marginLeft="300px" />
+	<ImageView android:src="@drawable/foot" android:id="@+id/img_foot"
+		android:layout_height="76px" android:layout_width="144px"
+		android:layout_marginLeft="10px" android:layout_marginTop="590px"/>
+	<ImageView android:src="@drawable/body" android:id="@+id/img_body"
+		android:layout_width="169px" android:layout_height="166px"
+		android:layout_marginTop="530px"/>
+	<ImageView android:src="@drawable/head" android:id="@+id/img_head"
+		android:layout_width="219px" android:layout_height="208px" android:layout_marginTop="450px" android:layout_marginLeft="-30px"/>
+	<ImageView android:src="@drawable/ear_left" android:id="@+id/img_ear_left"
+		android:layout_height="70px" android:layout_width="40px"
+		android:layout_marginLeft="44px" android:layout_marginTop="575px"/>
+	<ImageView android:src="@drawable/ear_right" android:id="@+id/img_ear_right"
+		android:layout_height="51px" android:layout_width="62px"
+		android:layout_marginLeft="44px" android:layout_marginTop="575px"/>
+	<ImageView android:src="@drawable/eye_left" android:id="@+id/img_eye_left"
+		android:layout_width="58px" android:layout_height="60px"
+		android:layout_marginLeft="44px" android:layout_marginTop="575px"/>
+	<ImageView android:src="@drawable/eye_right" android:id="@+id/img_eye_right"
+		android:layout_width="57px" android:layout_height="56px"
+		android:layout_marginLeft="44px" android:layout_marginTop="575px"/>
+</RelativeLayout>

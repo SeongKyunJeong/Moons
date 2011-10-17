@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<ImageView android:src="@drawable/washing" android:id="@+id/img_washing"
+		android:layout_height="250px" android:layout_marginTop="340px"
+		android:layout_width="140px" />
+	<ImageView android:src="@drawable/foot" android:id="@+id/img_foot"
+		android:layout_height="76px" android:layout_width="144px"
+		android:layout_marginLeft="300px" android:layout_marginTop="530px" />
+	<ImageView android:src="@drawable/body" android:id="@+id/img_body"
+		android:layout_width="169px" android:layout_height="166px"
+		android:layout_marginLeft="290px" android:layout_marginTop="390px" />
+	<ImageView android:src="@drawable/head" android:id="@+id/img_head"
+		android:layout_width="219px" android:layout_height="208px"
+		android:layout_marginLeft="240px" android:layout_marginTop="210px" />
+	<ImageView android:layout_gravity="center_vertical|center"
+		android:src="@drawable/ear_left" android:id="@+id/img_ear_left"
+		android:layout_height="70px" android:layout_width="40px"
+		android:layout_marginLeft="245px" android:layout_marginTop="290px" />
+	<ImageView android:src="@drawable/ear_right" android:id="@+id/img_ear_right"
+		android:layout_height="51px" android:layout_width="62px"
+		android:layout_marginLeft="400px" android:layout_marginTop="290px" />
+	<ImageView android:layout_gravity="center_vertical|center"
+		android:src="@drawable/eye_left" android:id="@+id/img_eye_left"
+		android:layout_width="58px" android:layout_height="60px"
+		android:layout_marginLeft="272px" android:layout_marginTop="295px" />
+	<ImageView android:src="@drawable/eye_right" android:id="@+id/img_eye_right"
+		android:layout_gravity="center_vertical|center" android:layout_width="57px"
+		android:layout_height="56px" android:layout_marginLeft="348px"
+		android:layout_marginTop="288px" />
+	<Button android:id="@+id/washing" android:layout_width="fill_parent"
+		android:onClick="mOnClick" android:text="washing"
+		android:layout_height="wrap_content" android:layout_marginTop="650px" />
+	<TextView android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:text="문스를 세탁기에 넣어주세요."
+		android:id="@+id/text_wash" android:layout_marginTop="610px" />
+
+</RelativeLayout>

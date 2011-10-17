@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:id="@+id/assemble" android:layout_width="1000px"
+	android:layout_height="1000px">
+	<ImageView android:src="@drawable/room" android:id="@+id/room" android:layout_height="600px"
+		android:layout_width="480px" />
+	<ImageView android:src="@drawable/wash_box" android:id="@+id/img_washbox"
+		android:layout_height="90dip" android:layout_width="70dip" android:layout_marginLeft="250dip"
+		android:layout_marginTop="390dip" />
+	<ImageView android:src="@drawable/foot" android:id="@+id/img_foot" android:layout_height="50dip"
+		android:layout_width="70dip" android:layout_marginTop="430dip" android:layout_marginLeft="125dip" />
+	<ImageView android:src="@drawable/body" android:id="@+id/img_body" android:layout_height="80dip"
+		android:layout_width="80dip" android:layout_marginTop="400dip" android:layout_marginLeft="120dip" />
+	<ImageView android:src="@drawable/head" android:id="@+id/img_head" android:layout_height="100dip"
+		android:layout_width="100dip" android:layout_marginLeft="100dip" android:layout_marginTop="386dip"/>
+	<ImageView android:src="@drawable/ear_left" android:id="@+id/img_ear_left"
+		android:layout_height="30dip" android:layout_width="30dip" android:layout_marginLeft="96dip" android:layout_marginTop="427dip"/>
+	<ImageView android:src="@drawable/ear_right" android:id="@+id/img_ear_right"
+		android:layout_height="30dip" android:layout_width="30dip" android:layout_marginLeft="175dip" android:layout_marginTop="426dip"/>
+	<ImageView android:src="@drawable/eye_left" android:id="@+id/img_eye_left"
+		android:layout_height="30dip" android:layout_width="30dip" android:layout_marginLeft="150dip" android:layout_marginTop="421dip"/>
+	<ImageView android:src="@drawable/eye_right" android:id="@+id/img_eye_right"
+		android:layout_height="30dip" android:layout_width="30dip" android:layout_marginLeft="112dip" android:layout_marginTop="424dip"/>
+</RelativeLayout>

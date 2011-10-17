@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="vertical" android:id="@+id/infoLinear"
+	android:layout_height="1200px" android:layout_width="1000px">
+	<ImageView android:src="@drawable/bg_all" android:id="@+id/img_bg"
+		android:layout_height="730px" android:layout_width="1200px"
+		android:layout_marginLeft="-660px" />
+	<ImageView android:src="@drawable/foot" android:id="@+id/img_foot"
+		android:layout_height="76px" android:layout_width="144px"
+		android:layout_marginTop="630px" android:layout_marginLeft="300px" />
+	<ImageView android:src="@drawable/body" android:id="@+id/img_body"
+		android:layout_width="169px" android:layout_height="166px"
+		android:layout_marginLeft="290px" android:layout_marginTop="490px" />
+	<ImageView android:src="@drawable/head" android:id="@+id/img_head"
+		android:layout_gravity="center_vertical|center" android:layout_width="219px"
+		android:layout_height="208px" android:layout_marginTop="310px"
+		android:layout_marginLeft="240px" />
+	<ImageView android:layout_gravity="center_vertical|center"
+		android:src="@drawable/ear_left" android:id="@+id/img_ear_left"
+		android:layout_height="70px" android:layout_width="40px"
+		android:layout_marginTop="390px" android:layout_marginLeft="245px" />
+	<ImageView android:src="@drawable/ear_right" android:id="@+id/img_ear_right"
+		android:layout_height="51px" android:layout_width="62px"
+		android:layout_marginTop="390px" android:layout_marginLeft="400px" />
+	<ImageView android:layout_gravity="center_vertical|center"
+		android:src="@drawable/eye_left" android:id="@+id/img_eye_left"
+		android:layout_width="58px" android:layout_height="60px"
+		android:layout_marginTop="395px" android:layout_marginLeft="272px" />
+	<ImageView android:src="@drawable/eye_right" android:id="@+id/img_eye_right"
+		android:layout_gravity="center_vertical|center" android:layout_width="57px"
+		android:layout_height="56px" android:layout_marginTop="388px"
+		android:layout_marginLeft="348px" />
+</RelativeLayout>

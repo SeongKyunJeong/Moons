@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, TiredManActivity!</string>
+    <string name="app_name">문스 세탁</string>
+    <string name="info_layout_welcome">문스의 퇴근</string>
+    <string name="wash_layout_name">문스의 빨래줄</string>
+    <string name="assemble_layout_name">문스의 방</string>
+</resources>
