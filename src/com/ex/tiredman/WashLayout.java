@@ -322,8 +322,8 @@ public class WashLayout extends Activity {
 				mMapImageView.get(OBJECT.OBJECT_MOONS_FOOT).setEnabled(true);
 
 				imageView = mMapImageView.get(OBJECT.OBJECT_MOONS_FOOT);
+				
 				imageView.clearAnimation();
-
 				imageView.layout(imageView.getLeft() + 190, imageView.getTop() - 250, imageView.getRight() + 190,
 						imageView.getBottom() - 250);
 

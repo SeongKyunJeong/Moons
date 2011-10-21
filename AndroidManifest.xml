@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.ex.tiredman"
-	android:versionCode="1" android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="5" />
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.ex.tiredman" android:versionCode="1" android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="8" />
 
 	<application android:icon="@drawable/icon" android:label="@string/app_name">
 		<activity android:name=".TiredManActivity" android:label="@string/app_name">
@@ -9,7 +9,8 @@
 		<activity android:name=".InfoLayout" android:label="@string/info_layout_welcome">
 
 		</activity>
-		<activity android:label="@string/wash_layout_name" android:name=".WashLayout">
+		<activity android:label="@string/wash_layout_name"
+			android:name=".WashLayout">
 
 		</activity>
 		<activity android:name="AssembleLayout" android:label="@string/assemble_layout_name">
@@ -17,7 +18,7 @@
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>
-		
+
 		</activity>
 	</application>
 </manifest>

@@ -21,7 +21,6 @@ public class AssembleLayout extends Activity {
 	/** Called when the activity is first created. */
 	private HashMap<OBJECT, ImageView> mMapImageView;
 	private HashMap<OBJECT, AnimationSet> mMapAnimationSet;
-	private HashMap<OBJECT, AnimationSet> mMapAnimationTouchSet;
 
 	private int mWashBox;
 	private int preX, preY;
@@ -29,7 +28,6 @@ public class AssembleLayout extends Activity {
 	public AssembleLayout() {
 		this.mMapImageView = new HashMap<OBJECT, ImageView>();
 		this.mMapAnimationSet = new HashMap<OBJECT, AnimationSet>();
-		this.mMapAnimationTouchSet = new HashMap<OBJECT, AnimationSet>();
 		this.mWashBox = 0;
 		this.preX = 0;
 		this.preY = 0;
@@ -44,14 +42,14 @@ public class AssembleLayout extends Activity {
 	}
 
 	public void setImageView() {
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_washbox), OBJECT.OBJECT_THING_WASHBOX);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_head), OBJECT.OBJECT_MOONS_HEAD, 0);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_body), OBJECT.OBJECT_MOONS_BODY, 0);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_foot), OBJECT.OBJECT_MOONS_FOOT, 0);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_eye_left), OBJECT.OBJECT_MOONS_EYE_LEFT, 0);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_eye_right), OBJECT.OBJECT_MOONS_EYE_RIGHT, 0);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_ear_left), OBJECT.OBJECT_MOONS_EAR_LEFT, 0);
-		ImageSetId(this.mMapImageView, (ImageView) findViewById(R.id.img_ear_right), OBJECT.OBJECT_MOONS_EAR_RIGHT, 0);
+		ImageSetId(OBJECT.OBJECT_THING_WASHBOX, (ImageView) findViewById(R.id.img_washbox), 255);
+		ImageSetId(OBJECT.OBJECT_MOONS_HEAD, (ImageView) findViewById(R.id.img_head), 0);
+		ImageSetId(OBJECT.OBJECT_MOONS_BODY, (ImageView) findViewById(R.id.img_body), 0);
+		ImageSetId(OBJECT.OBJECT_MOONS_FOOT, (ImageView) findViewById(R.id.img_foot), 0);
+		ImageSetId(OBJECT.OBJECT_MOONS_EYE_LEFT, (ImageView) findViewById(R.id.img_eye_left), 0);
+		ImageSetId(OBJECT.OBJECT_MOONS_EYE_RIGHT, (ImageView) findViewById(R.id.img_eye_right), 0);
+		ImageSetId(OBJECT.OBJECT_MOONS_EAR_LEFT, (ImageView) findViewById(R.id.img_ear_left), 0);
+		ImageSetId(OBJECT.OBJECT_MOONS_EAR_RIGHT, (ImageView) findViewById(R.id.img_ear_right), 0);
 	}
 
 	public void setAnimationSet() {
@@ -60,18 +58,13 @@ public class AssembleLayout extends Activity {
 			animationSet.setInterpolator(new AccelerateDecelerateInterpolator());
 			this.mMapAnimationSet.put(obj, animationSet);
 			this.mMapAnimationSet.get(obj).setAnimationListener(animationListener);
+
 			if (obj == OBJECT.OBJECT_THING_WASHBOX) {
 				SetAnimation.Rotate(this.mMapAnimationSet.get(OBJECT.OBJECT_THING_WASHBOX), 0, -90,
 						Animation.RELATIVE_TO_SELF, 0, Animation.RELATIVE_TO_SELF, 1.0f, 0, 1000, 0, 0);
 			} else {
 				setAnimationRotateScale(this.mMapAnimationSet.get(obj));
 			}
-		}
-
-		for (OBJECT obj : OBJECT.values()) {
-			AnimationSet animationSet = new AnimationSet(true);
-			animationSet.setInterpolator(new AccelerateDecelerateInterpolator());
-			this.mMapAnimationTouchSet.put(obj, animationSet);
 		}
 	}
 
@@ -90,36 +83,34 @@ public class AssembleLayout extends Activity {
 				preX = (int) event.getX();
 				preY = (int) event.getY();
 
-				switch (v.getId()) {
-				case R.id.img_washbox:
+				if (v.getId() == R.id.img_washbox) {
 					v.bringToFront();
 					v.setEnabled(false);
 					v.startAnimation(mMapAnimationSet.get(OBJECT.OBJECT_THING_WASHBOX));
 					mWashBox++;
-					break;
-				}
-				// ImageView imgView =
-				// mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
-				// RotateAnimation rotate = new RotateAnimation(0, -360,
-				// Animation.ABSOLUTE, imgView.getWidth() / 2,
-				// Animation.ABSOLUTE, imgView.getHeight() / 2);
-				// rotate.setRepeatCount(Animation.INFINITE);
-				// rotate.setRepeatMode(Animation.REVERSE);
-				// rotate.setDuration(500);
-				//
-				// mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT).startAnimation(rotate);
-				// imgView = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
-				// rotate = new RotateAnimation(0, -360, Animation.ABSOLUTE,
-				// imgView.getWidth() / 2, Animation.ABSOLUTE,
-				// imgView.getHeight() / 2);
-				// rotate.setRepeatCount(Animation.INFINITE);
-				// rotate.setRepeatMode(Animation.REVERSE);
-				// rotate.setDuration(500);
-				//
-				// mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT).startAnimation(rotate);
+					// TouchEnabled(true);
+				} else {
+					ImageView imgView = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT);
+					RotateAnimation rotate = new RotateAnimation(0, 90, Animation.ABSOLUTE, imgView.getWidth() / 2,
+							Animation.ABSOLUTE, imgView.getHeight() / 2);
+					rotate.setRepeatCount(Animation.INFINITE);
+					rotate.setRepeatMode(Animation.REVERSE);
+					rotate.setDuration(500);
 
+					imgView.startAnimation(rotate);
+
+					imgView = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
+					rotate = new RotateAnimation(0, -90, Animation.ABSOLUTE, imgView.getWidth() / 2,
+							Animation.ABSOLUTE, imgView.getHeight() / 2);
+					rotate.setRepeatCount(Animation.INFINITE);
+					rotate.setRepeatMode(Animation.REVERSE);
+					rotate.setDuration(500);
+
+					imgView.startAnimation(rotate);
+				}
 				return true;
 			} else if (event.getAction() == MotionEvent.ACTION_UP) {
+
 				for (OBJECT obj : OBJECT.values()) {
 					if (mMapImageView.get(obj) != null) {
 						mMapImageView.get(obj).clearAnimation();
@@ -138,14 +129,6 @@ public class AssembleLayout extends Activity {
 
 				// 이미지가 움진인 만큼의 margin 값과 layout 값을 저장해야함.
 				// 허니컴에서부터는 이미지 애니메이션 이후에 layout 값들을 저장한다고 함.
-				imageLayoutSet(imgEarLeft, transX, transY);
-				imageLayoutSet(imgEarRight, transX, transY);
-				imageLayoutSet(imgEyeLeft, transX, transY);
-				imageLayoutSet(imgEyeRight, transX, transY);
-				imageLayoutSet(imgHead, transX, transY);
-				imageLayoutSet(imgBody, transX, transY);
-				imageLayoutSet(imgFoot, transX, transY);
-
 				imageLayoutMarginSet(imgEarLeft, transX, transY, false);
 				imageLayoutMarginSet(imgEarRight, transX, transY, false);
 				imageLayoutMarginSet(imgEyeLeft, transX, transY, false);
@@ -161,11 +144,9 @@ public class AssembleLayout extends Activity {
 
 	private Animation.AnimationListener animationListener = new Animation.AnimationListener() {
 		public void onAnimationStart(Animation animation) {
-			// TODO Auto-generated method stub
 		}
 
 		public void onAnimationRepeat(Animation animation) {
-			// TODO Auto-generated method stub
 		}
 
 		public void onAnimationEnd(Animation animation) {
@@ -202,7 +183,6 @@ public class AssembleLayout extends Activity {
 				mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
 
 				ImageView v = mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD);
-
 				ViewGroup.MarginLayoutParams marginHead = null;
 				marginHead = (RelativeLayout.LayoutParams) v.getLayoutParams();
 
@@ -210,322 +190,41 @@ public class AssembleLayout extends Activity {
 				pivotHeadX = marginHead.width / 2;
 				pivotHeadY = marginHead.height / 2 - 305;
 
-				AnimationSet aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				transUpDownRotate(aniSet, -305, 200, 1000, 1000, 1500, 360, pivotHeadX, pivotHeadY, 500, 1000);
-				v.bringToFront();
-				v.startAnimation(aniSet);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_HEAD");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD), 0, -105);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT);
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-				BodyAnimationEnd(v, aniSet, pivotHeadX, pivotHeadY, marginHead);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EAR_LEFT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), 0, -105);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-				BodyAnimationEnd(v, aniSet, pivotHeadX, pivotHeadY, marginHead);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EAR_RIGHT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 0, -105);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-				BodyAnimationEnd(v, aniSet, pivotHeadX, pivotHeadY, marginHead);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EYE_LEFT");
-						ImageView v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT);
-						imageLayoutMarginSet(v, 0, -105);
-
-						RotateAnimation rotate = SetAnimation.Rotate(0, 90, Animation.ABSOLUTE, v.getWidth() / 2,
-								Animation.ABSOLUTE, v.getHeight() / 2, 0, 500, Animation.INFINITE, Animation.REVERSE,
-								true);
-						v.startAnimation(rotate);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-				BodyAnimationEnd(v, aniSet, pivotHeadX, pivotHeadY, marginHead);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EYE_RIGHT");
-						ImageView v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), 0, -105);
-						RotateAnimation rotate = SetAnimation.Rotate(0, -90, Animation.ABSOLUTE, v.getWidth() / 2,
-								Animation.ABSOLUTE, v.getHeight() / 2, 0, 500, Animation.INFINITE, Animation.REVERSE,
-								true);
-						v.startAnimation(rotate);
-
-						v.startAnimation(rotate);
-					}
-				});
+				BodyAnimationEnd(v, pivotHeadX, pivotHeadY, marginHead, true);
+				BodyAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), pivotHeadX, pivotHeadY, marginHead,
+						false);
+				BodyAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), pivotHeadX, pivotHeadY, marginHead,
+						false);
+				BodyAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), pivotHeadX, pivotHeadY, marginHead,
+						false);
+				BodyAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), pivotHeadX, pivotHeadY, marginHead,
+						false);
 
 			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_FOOT)) {
 				mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
 
-				ImageView v = mMapImageView.get(OBJECT.OBJECT_MOONS_BODY);
-
-				AnimationSet aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				FootAnimationEnd(aniSet, v, -145, 100, 600, 1000, 600);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_BODY");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_BODY), 0, -45);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				FootAnimationEnd(aniSet, v, -345, 300, 900, 1000, 900);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_HEAD");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD), 0, -45);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				FootAnimationEnd(aniSet, v, -345, 300, 900, 1200, 900);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EAR_LEFT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), 0, -45);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				FootAnimationEnd(aniSet, v, -345, 300, 900, 1400, 900);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EAR_RIGHT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 0, -45);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				FootAnimationEnd(aniSet, v, -345, 300, 900, 1600, 900);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EYE_LEFT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), 0, -45);
-					}
-				});
-
-				v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
-
-				aniSet = new AnimationSet(true);
-				aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
-
-				FootAnimationEnd(aniSet, v, -345, 300, 900, 1800, 900);
-
-				aniSet.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EYE_LEFT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), 0, -45);
-					}
-				});
+				FootAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_BODY), -145, 100, 600, 1000, 600, false);
+				FootAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD), -345, 300, 900, 1000, 900, false);
+				FootAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), -345, 300, 900, 1200, 900, false);
+				FootAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), -345, 300, 900, 1400, 900, false);
+				FootAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), -345, 300, 900, 1600, 900, false);
+				FootAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), -345, 300, 900, 1800, 900, true);
 			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_LEFT)) {
-				mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
-
-				TranslateAnimation translate = SetAnimation.Translate(Animation.RELATIVE_TO_SELF, 30,
-						Animation.RELATIVE_TO_SELF, 0, 0, 1000, 0, 0, true);
-
-				FaceAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), translate);
-
-				translate.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EYE_LEFT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), 30, 0);
-					}
-				});
+				HeadAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), 30, 1000,false);
 			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EYE_RIGHT)) {
-				mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
-
-				TranslateAnimation translate = SetAnimation.Translate(Animation.RELATIVE_TO_SELF, -30,
-						Animation.RELATIVE_TO_SELF, 0, 0, 1000, 0, 0, true);
-
-				FaceAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), translate);
-
-				translate.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EYE_RIGHT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), -30, 0);
-					}
-				});
+				HeadAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), -30, 1000,false);
 			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_LEFT)) {
-				mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
-
-				TranslateAnimation translate = SetAnimation.Translate(Animation.RELATIVE_TO_SELF, -60,
-						Animation.RELATIVE_TO_SELF, 0, 0, 1000, 0, 0, true);
-
-				FaceAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), translate);
-
-				translate.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EAR_LEFT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), -60, 0);
-					}
-				});
+				HeadAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), -60, 1000,false);
 			} else if (animation == mMapAnimationSet.get(OBJECT.OBJECT_MOONS_EAR_RIGHT)) {
-				mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
-
-				TranslateAnimation translate = SetAnimation.Translate(Animation.RELATIVE_TO_SELF, 60,
-						Animation.RELATIVE_TO_SELF, 0, 0, 1000, 0, 0, true);
-
-				FaceAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), translate);
-
-				translate.setAnimationListener(new Animation.AnimationListener() {
-					public void onAnimationStart(Animation animation) {
-					}
-
-					public void onAnimationRepeat(Animation animation) {
-					}
-
-					public void onAnimationEnd(Animation animation) {
-						System.out.println("OBJECT_MOONS_EAR_RIGHT");
-						imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 60, 0);
-					}
-				});
+				HeadAnimationEnd(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 60, 1000,true);
 			}
 		}
 
 	};
 
 	public void transUpDownRotate(AnimationSet aniSet, int upValue, int downValue, int upDuration, int downDuration,
-			int downOffset, int rotateDegree, int rotatePivotX, int rotatePivotY, int rotateDuration, int rotateOffset) {
+			int downOffset, int rotateDegree, int rotatePivotX, int rotatePivotY, int rotateDuration, int rotateOffset,
+			boolean listener) {
 		TranslateAnimation transUp = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, upValue);
 		transUp.setFillAfter(true);
 		transUp.setFillEnabled(true);
@@ -544,14 +243,128 @@ public class AssembleLayout extends Activity {
 		rotate.setFillAfter(true);
 		rotate.setFillEnabled(true);
 
+		aniSet.setFillAfter(true);
+		aniSet.setFillEnabled(true);
 		aniSet.addAnimation(transUp);
 		aniSet.addAnimation(transDown);
 		aniSet.addAnimation(rotate);
 
+		if (listener) {
+			transDown.setAnimationListener(new Animation.AnimationListener() {
+				public void onAnimationEnd(Animation animation) {
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD), 0, -105, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), 0, -105, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 0, -105, true);
+
+					ImageView v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT);
+					imageLayoutMarginSet(v, 0, -105, true);
+					RotateAnimation rotate = SetAnimation.Rotate(0, 90, Animation.ABSOLUTE, v.getWidth() / 2,
+							Animation.ABSOLUTE, v.getHeight() / 2, 0, 500, Animation.INFINITE, Animation.REVERSE, true);
+					v.startAnimation(rotate);
+
+					v = mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT);
+					imageLayoutMarginSet(v, 0, -105, true);
+					rotate = SetAnimation.Rotate(0, -90, Animation.ABSOLUTE, v.getWidth() / 2, Animation.ABSOLUTE,
+							v.getHeight() / 2, 0, 500, Animation.INFINITE, Animation.REVERSE, true);
+					v.startAnimation(rotate);
+				}
+
+				public void onAnimationRepeat(Animation animation) {
+				}
+
+				public void onAnimationStart(Animation animation) {
+				}
+			});
+		}
 	}
 
-	public void FootAnimationEnd(AnimationSet aniSet, ImageView v, int upValue, int downValue, int upDuration,
-			int downDuration, int downOffset) {
+
+
+	public void imageLayoutMarginSet(ImageView v, int marginWidth, int marginHeight, boolean clear) {
+		if (clear) {
+			v.clearAnimation();
+		}
+		v.layout(v.getLeft() + marginWidth, v.getTop() + marginHeight, v.getRight() + marginWidth, v.getBottom()
+				+ marginHeight);
+
+		ViewGroup.MarginLayoutParams marginObject = null;
+		marginObject = (RelativeLayout.LayoutParams) v.getLayoutParams();
+		marginObject.setMargins(marginObject.leftMargin + marginWidth, marginObject.topMargin + marginHeight,
+				marginObject.rightMargin, marginObject.bottomMargin);
+		v.setLayoutParams(marginObject);
+	}
+
+	public void ImageSetId(OBJECT k, ImageView v, int alpha) {
+		v.setOnTouchListener(touchListener);
+		v.setAlpha(alpha);
+		this.mMapImageView.put(k, v);
+	}
+
+	public void setAnimationRotateScale(AnimationSet aniSet) {
+		SetAnimation.Rotate(aniSet, 0, 1080, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, 0,
+				2000, 0, 0, true);
+		SetAnimation.Scale(aniSet, 0.2f, 1.0f, 0.2f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f,
+				Animation.RELATIVE_TO_SELF, 0.5f, 0, 2000, 0, 0, true);
+		aniSet.setFillAfter(true);
+		aniSet.setFillEnabled(true);
+	}
+
+	public void WashBoxAnimationEnd(ImageView v, AnimationSet aniSet, int alpha) {
+		v.bringToFront();
+		v.setAlpha(alpha);
+		v.startAnimation(aniSet);
+	}
+	
+	public void HeadAnimationEnd(ImageView v, int widthValue, int duration, boolean listener) {
+		mMapImageView.get(OBJECT.OBJECT_THING_WASHBOX).setEnabled(true);
+
+		TranslateAnimation translate = SetAnimation.Translate(Animation.RELATIVE_TO_SELF, widthValue,
+				Animation.RELATIVE_TO_SELF, 0, 0, duration, 0, 0, true);
+		v.startAnimation(translate);
+
+		if (listener) {
+			translate.setAnimationListener(new Animation.AnimationListener() {
+				public void onAnimationStart(Animation animation) {
+				}
+
+				public void onAnimationRepeat(Animation animation) {
+				}
+
+				public void onAnimationEnd(Animation animation) {
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), 30, 0, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), -30, 0, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), -60, 0, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 60, 0, true);
+
+				}
+			});
+		}
+	}
+
+	public void BodyAnimationEnd(ImageView v, int pivotHeadX, int pivotHeadY, ViewGroup.MarginLayoutParams marginHead,
+			boolean listener) {
+		ViewGroup.MarginLayoutParams marginOther = (RelativeLayout.LayoutParams) v.getLayoutParams();
+
+		int pivotOtherX, pivotOtherY;
+		pivotOtherX = pivotHeadX - (marginOther.leftMargin - marginHead.leftMargin);
+		pivotOtherY = pivotHeadY - (marginOther.topMargin - marginHead.topMargin);
+
+		AnimationSet aniSet = new AnimationSet(true);
+		aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
+		if (listener) {
+			transUpDownRotate(aniSet, -285, 180, 1000, 800, 1500, 360, pivotHeadX, pivotHeadY, 500, 1000, listener);
+		} else {
+			transUpDownRotate(aniSet, -285, 180, 600, 800, 1500, 360, pivotOtherX, pivotOtherY, 500, 1000, listener);
+		}
+		v.bringToFront();
+		v.startAnimation(aniSet);
+	}
+	
+	public void FootAnimationEnd(ImageView v, int upValue, int downValue, int upDuration, int downDuration,
+			int downOffset, boolean listener) {
+		AnimationSet aniSet = new AnimationSet(true);
+		aniSet.setInterpolator(new AccelerateDecelerateInterpolator());
+
 		TranslateAnimation transUp = new TranslateAnimation(0, 0, Animation.RELATIVE_TO_SELF, upValue);
 		transUp.setFillAfter(true);
 		transUp.setFillEnabled(true);
@@ -563,80 +376,42 @@ public class AssembleLayout extends Activity {
 		transDown.setDuration(downDuration);
 		transDown.setStartOffset(downOffset);
 
+		aniSet.setFillAfter(true);
+		aniSet.setFillEnabled(true);
 		aniSet.addAnimation(transUp);
 		aniSet.addAnimation(transDown);
-		v.bringToFront();
-		v.startAnimation(aniSet);
-	}
-
-	public void imageLayoutMarginSet(ImageView v, int marginWidth, int marginHeight) {
-		v.clearAnimation();
-		v.layout(v.getLeft() + marginWidth, v.getTop() + marginHeight, v.getRight() + marginWidth, v.getBottom()
-				+ marginHeight);
-
-		ViewGroup.MarginLayoutParams marginObject = null;
-		marginObject = (RelativeLayout.LayoutParams) v.getLayoutParams();
-		marginObject.setMargins(marginObject.leftMargin + marginWidth, marginObject.topMargin + marginHeight,
-				marginObject.rightMargin, marginObject.bottomMargin);
-		v.setLayoutParams(marginObject);
-	}
-
-	public void imageLayoutMarginSet(ImageView v, int marginWidth, int marginHeight, boolean t) {
-		v.layout(v.getLeft() + marginWidth, v.getTop() + marginHeight, v.getRight() + marginWidth, v.getBottom()
-				+ marginHeight);
-
-		ViewGroup.MarginLayoutParams marginObject = null;
-		marginObject = (RelativeLayout.LayoutParams) v.getLayoutParams();
-		marginObject.setMargins(marginObject.leftMargin + marginWidth, marginObject.topMargin + marginHeight,
-				marginObject.rightMargin, marginObject.bottomMargin);
-		v.setLayoutParams(marginObject);
-	}
-
-	public void imageLayoutSet(ImageView v, int transX, int transY) {
-		v.layout(v.getLeft() + transX, v.getTop() + transY, v.getRight() + transX, v.getBottom() + transY);
-	}
-
-	public void ImageSetId(HashMap<OBJECT, ImageView> HashView, ImageView v, OBJECT obj) {
-		v.setOnTouchListener(touchListener);
-		HashView.put(obj, v);
-	}
-
-	public void ImageSetId(HashMap<OBJECT, ImageView> HashView, ImageView v, OBJECT obj, int alpha) {
-		v.setOnTouchListener(touchListener);
-		HashView.put(obj, v);
-		v.setAlpha(alpha);
-	}
-
-	public void setAnimationRotateScale(AnimationSet aniSet) {
-		SetAnimation.Rotate(aniSet, 0, 1080, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f, 0,
-				2000, 0, 0, true);
-		SetAnimation.Scale(aniSet, 0.2f, 1.0f, 0.2f, 1.0f, Animation.RELATIVE_TO_SELF, 0.5f,
-				Animation.RELATIVE_TO_SELF, 0.5f, 0, 2000, 0, 0, true);
-	}
-
-	public void WashBoxAnimationEnd(ImageView v, AnimationSet aniSet, int alpha) {
-		v.setAlpha(alpha);
-		v.bringToFront();
-		v.startAnimation(aniSet);
-	}
-
-	public void BodyAnimationEnd(ImageView v, AnimationSet aniSet, int pivotHeadX, int pivotHeadY,
-			ViewGroup.MarginLayoutParams marginHead) {
-		ViewGroup.MarginLayoutParams marginOther = (RelativeLayout.LayoutParams) v.getLayoutParams();
-
-		int pivotOtherX, pivotOtherY;
-		pivotOtherX = pivotHeadX - (marginOther.leftMargin - marginHead.leftMargin);
-		pivotOtherY = pivotHeadY - (marginOther.topMargin - marginHead.topMargin);
-
-		transUpDownRotate(aniSet, -305, 200, 1000, 1000, 1500, 360, pivotOtherX, pivotOtherY, 500, 1000);
 
 		v.bringToFront();
 		v.startAnimation(aniSet);
+
+		if (listener) {
+			transDown.setAnimationListener(new Animation.AnimationListener() {
+				public void onAnimationEnd(Animation animation) {
+					// TODO Auto-generated method stub
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_BODY), 0, -45, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_HEAD), 0, -45, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_RIGHT), 0, -45, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EYE_LEFT), 0, -45, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_RIGHT), 0, -45, true);
+					imageLayoutMarginSet(mMapImageView.get(OBJECT.OBJECT_MOONS_EAR_LEFT), 0, -45, true);
+				}
+
+				public void onAnimationRepeat(Animation animation) {
+				}
+
+				public void onAnimationStart(Animation animation) {
+				}
+			});
+		}
 	}
 
-	public void FaceAnimationEnd(ImageView v, TranslateAnimation translate) {
-		v.bringToFront();
-		v.startAnimation(translate);
+	public void TouchEnabled(boolean touch) {
+		for (OBJECT obj : OBJECT.values()) {
+			if (mMapImageView.get(obj) != null || obj != OBJECT.OBJECT_THING_WASHBOX) {
+				System.out.println("TouchEnabled : " + touch);
+				mMapImageView.get(obj).setEnabled(touch);
+			}
+		}
 	}
 
 }
